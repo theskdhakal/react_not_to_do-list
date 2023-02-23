@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import { Form } from "./Form";
+import { Table } from "./Table";
 
 function App() {
+  const taskList = [];
+  const badList = [];
+  const invalidChars = ["+", "-", "e", "E"];
+  const hrsPerWeek = 24 * 7;
+
+  const [task, setTask] = useState([]);
+  const handleOnFormSubmit = (newData) => {
+    setTask([...task, newData]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div class="wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center mt-5">
+            <h1>Not To Do List</h1>
+          </div>
+        </div>
+      </div>
+      <Form setTask={handleOnFormSubmit} />
+      <Table task={task} />
     </div>
   );
 }
